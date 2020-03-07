@@ -1,0 +1,16 @@
+evolucio 4
+  equilibrant la g fent g=E_tramp/E_inter
+
+evolucio 5
+  equilibrant la g fent g=E_tramp/E_inter
+  dt = 0.0002
+
+evolucio 6
+  g=1
+  equilibrant la g fent r*=(E_inter/E_tramp)**(0.25)
+
+evolucio 7
+  igual que evolucio6 però calculant la força a t=0
+
+evolucio 8
+  g=k=1 fent r*=(E_inter/E_tramp)**(0.25) dt=T/10000
