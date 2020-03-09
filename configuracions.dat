@@ -14,3 +14,6 @@ evolucio 7
 
 evolucio 8
   g=k=1 fent r*=(E_inter/E_tramp)**(0.25) dt=T/10000
+
+evolucio9
+  com la 4 però centrant les posicions inicials
