@@ -7,7 +7,7 @@ def overlap_fun(file):
     r0= np.load(file+'0.npy')
     overlap =np.empty_like(t)*0
 
-    for i in range(len(t)-12):
+    for i in range(len(t)):
         ri=np.load(file+str(50*i)+'.npy')
         overlap[i]= np.sum(r0*ri)/ np.sqrt(np.sum(r0**2)*np.sum(ri**2))
     return overlap
