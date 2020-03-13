@@ -12,7 +12,7 @@ t=np.zeros((1))
 v = np.zeros((N,2), order='F')
 F = np.zeros((N,2), order='F')
 
-th=0.25*np.max(r)
+th=0.15*np.max(r)
 
 
 E_inter, E_tramp, E_kin = nf.mesure_th(r=r, v=v, k=k, g=1.0, th=th)
@@ -26,11 +26,11 @@ nf.forces_th(r=r, f=F, k=k, g=g, th=th)
 t=np.zeros((1))
 print(datetime.datetime.now())
 s=0
-np.save((r'evolucio10/triangleT_025max_r-'+str(s)), r)
-np.save((r'evolucio10/triangleT_025max_v-'+str(s)), v)
+np.save((r'evolucio10/triangleT_015max_r-'+str(s)), r)
+np.save((r'evolucio10/triangleT_015max_v-'+str(s)), v)
 for i in range(200):
     s+=50
     nf.verlet_steps_th(r=r, v=v, f=F, t=t, steps=50, k=k, g=g, dt=dt, th=th)
-    np.save((r'evolucio10/triangleT_025max_r-'+str(s)), r)
-    np.save((r'evolucio10/triangleT_025max_v-'+str(s)), v)
+    np.save((r'evolucio10/triangleT_015max_r-'+str(s)), r)
+    np.save((r'evolucio10/triangleT_015max_v-'+str(s)), v)
     print(t, datetime.datetime.now())
