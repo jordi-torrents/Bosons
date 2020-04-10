@@ -23,6 +23,34 @@ subroutine verlet_steps(r, v, F, t, n, steps, k, g, dt)
   t = t + dt*dble(steps)
 end subroutine
 
+subroutine verlet_steps_mod(r, v, F, t, n, steps, k, g, dt)
+  integer :: n, steps, l
+  real(8), dimension(n,2) :: r, v, F, F_new
+  real(8) :: t, k, g, dt, d2, phi, d1, direction(2)
+  real(8), dimension(2) :: dif, force_ij
+  !f2py intent(inout) t
+  do l=1,steps
+    r = r+v*dt+F*0.5d0*dt**2
+    F_new=0.d0
+    do i=1,n
+      F_new(i,:)=F_new(i,:)-k*r(i,:)
+      do j=i+1,n
+        dif = r(j,:) - r(i,:)
+        phi = 3.d0*datan2(dif(2), dif(1))
+        direction = (/cos(phi),-sin(phi)/)
+        d2=dif(1)*dif(1)+dif(2)*dif(2)
+        d1=dsqrt(d2)
+        force_ij = -2.d0*g*direction/(d2*d1)
+        F_new(i,:)=F_new(i,:)+force_ij
+        F_new(j,:)=F_new(j,:)-force_ij
+      end do
+    end do
+    v = v + (F+F_new)*0.5d0*dt
+    F=F_new
+  end do
+  t = t + dt*dble(steps)
+end subroutine
+
 subroutine forces(r, F, n, k, g)
   integer :: n
   real(8), dimension(n,2) :: r, F
